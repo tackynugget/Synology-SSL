@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Import variables from /usr/local/share/acme.sh/account.conf; namely $p12cert_password and $acme_home. $SERVER_NAME is a natively-available ENV variable
+source /usr/local/share/acme.sh/account.conf
+
+# RENEW SINGLE CERTIFICATE (cf. https://lippertmarkus.com/2020/03/14/synology-le-dns-auto-renew/#usage) 
+echo "Attempting to renew $SERVER_NAME's certificate..."
+$acme_home/acme.sh --renew -d $SERVER_NAME --home $acme_home --force --insecure --server  letsencrypt
+
+# This if statement checks to see if the a new cer file was generated before attempting to manage the new cert
+if [[ -n $(find $acme_home/$SERVER_NAME/$SERVER_NAME.cer -mmin -2) ]]
+#then
+    echo "New cert found. Creating a p12 cert file..."
+    $acme_home/acme.sh --toPkcs -d $SERVER_NAME --home $acme_home --password $p12cert_password
+
+    echo "Setting the owner and group to match existing assets in the $acme_home/$SERVER_NAME/"
+    chown $SYNO_Username:administrators $acme_home/$SERVER_NAME/$SERVER_NAME.pfx 
+
+    echo "Setting the remaining permissions to match existing assets"
+    chmod 770 $acme_home/$SERVER_NAME/$SERVER_NAME.pfx 
+
+    # All cert files are then placed into this protected directory: /usr/syno/etc/certificate/system/default and will require root access for retrieval.
+else
+    echo "No new certs found. Exiting."
+fi

@@ -1,0 +1,23 @@
+SAVED_CF_Token='<populate from CloudFlare>'
+SAVED_CF_Account_ID='<populate from CloudFlare>'
+SAVED_CF_Zone_ID='<populate from CloudFlare>'
+
+USER_PATH='/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin'
+AUTO_UPGRADE='1'
+UPGRADE_HASH='<will be auto-populated>'
+
+SYNO_Username='<Synology admin account that will run the script>'
+SYNO_Password='<Password for the Synology admin account that will run the script>'
+SYNO_Certificate='<Name the certificate>'
+SYNO_Scheme='https'
+SYNO_Hostname='localhost'
+SYNO_Port='8888'
+SYNO_DID='<Only populate if SYNO_Username requires MFA>'
+SYNO_Create='1'
+HTTPS_INSECURE='1'
+
+# p12 password (for plex to use to unencrypted the cert)
+p12cert_password='<set a password for the PFX file>'
+
+# Acme home directory
+acme_home=/usr/local/share/acme.sh
