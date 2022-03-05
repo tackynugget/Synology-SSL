@@ -1,3 +1,6 @@
+# acme.sh creates this file upon the first run in the same directory as the acme.sh script.
+# The main change here is the inclusion of the p12cert_password variable/password.
+
 SAVED_CF_Token='<populate from CloudFlare>'
 SAVED_CF_Account_ID='<populate from CloudFlare>'
 SAVED_CF_Zone_ID='<populate from CloudFlare>'
@@ -18,6 +21,3 @@ HTTPS_INSECURE='1'
 
 # p12 password (for plex to use to unencrypted the cert)
 p12cert_password='<set a password for the PFX file>'
-
-# Acme home directory
-acme_home=/usr/local/share/acme.sh

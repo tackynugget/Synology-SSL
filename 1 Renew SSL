@@ -3,6 +3,9 @@
 # Import variables from /usr/local/share/acme.sh/account.conf; namely $p12cert_password and $acme_home. $SERVER_NAME is a natively-available ENV variable
 source /usr/local/share/acme.sh/account.conf
 
+# Acme home directory
+acme_home=/usr/local/share/acme.sh
+
 # RENEW SINGLE CERTIFICATE (cf. https://lippertmarkus.com/2020/03/14/synology-le-dns-auto-renew/#usage) 
 echo "Attempting to renew $SERVER_NAME's certificate..."
 $acme_home/acme.sh --renew -d $SERVER_NAME --home $acme_home --force --insecure --server  letsencrypt
